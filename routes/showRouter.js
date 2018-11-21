@@ -59,7 +59,7 @@ showRouter.route('/:showId')
         }
         // req.show.save() //error saving here
         // res.json(req.show)
-        res.json(req.show); //returning request show obj for error checking
+        res.json(req.body, req.show); //returning request show obj for error checking
     })//patch
     .delete((req,res)=>{
         req.show.remove(err => {

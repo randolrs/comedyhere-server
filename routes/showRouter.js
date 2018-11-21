@@ -10,7 +10,7 @@ showRouter.use('/:showId', (req, res, next)=>{
         else {
         	console.log(show);
         	if(show.length > 0) {
-        		req.show = show;
+        		req.show = show[0];
             	next();
         	} else {
         		//check id as a backup

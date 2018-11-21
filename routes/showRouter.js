@@ -57,9 +57,9 @@ showRouter.route('/:showId')
         for( let p in req.body ){
             req.show[p] = req.body[p]
         }
-        req.show.save()
+        // req.show.save() //error saving here
         // res.json(req.show)
-        res.json([]); //empty placeholder
+        res.json(req.show); //returning request show obj for error checking
     })//patch
     .delete((req,res)=>{
         req.show.remove(err => {

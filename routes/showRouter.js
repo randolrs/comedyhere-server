@@ -45,8 +45,8 @@ showRouter.route('/:showId')
         res.json(req.show)
     }) // end get Shows/:showId 
     .put((req,res) => {
-        req.show.title = req.body.title;
-        req.show.author = req.body.description;
+        // req.show.title = req.body.title;
+        // req.show.author = req.body.description;
         req.show.save()
         res.json(req.show)
     })

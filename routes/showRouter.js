@@ -8,19 +8,24 @@ showRouter.use('/:showId', (req, res, next)=>{
         if(err)
             res.status(500).send(err)
         else {
-            req.show = show;
-            next()
+        	console.log(show);
+        	if(show.length > 0) {
+        		req.show = show;
+            	next();
+        	} else {
+        		//check id as a backup
+        		Show.findById(req.params.showId, (err,show)=>{
+			        if(err)
+			            res.status(500).send(err)
+			        else {
+			            req.show = show;
+			            next()
+			        }
+			    })
+        	}
+            
         }
     })
-
-    // Show.findById( req.params.showId, (err,show)=>{
-    //     if(err)
-    //         res.status(500).send(err)
-    //     else {
-    //         req.show = show;
-    //         next()
-    //     }
-    // })
 })
 
 showRouter.route('/')

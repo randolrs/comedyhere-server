@@ -57,7 +57,7 @@ showRouter.route('/:showId')
         for( let p in req.body ){
             req.show[p] = req.body[p]
         }
-        // req.show.save()
+        req.show.save()
         // res.json(req.show)
         res.json([]); //empty placeholder
     })//patch

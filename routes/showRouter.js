@@ -3,7 +3,8 @@ import Show from '../models/showModel';
 const showRouter = express.Router();
 
 showRouter.use('/:showId', (req, res, next)=>{
-    Show.findById( req.params.showId, (err,show)=>{
+
+	Show.find({slug: req.params.showId}, (err,show)=>{
         if(err)
             res.status(500).send(err)
         else {
@@ -11,6 +12,15 @@ showRouter.use('/:showId', (req, res, next)=>{
             next()
         }
     })
+
+    // Show.findById( req.params.showId, (err,show)=>{
+    //     if(err)
+    //         res.status(500).send(err)
+    //     else {
+    //         req.show = show;
+    //         next()
+    //     }
+    // })
 })
 
 showRouter.route('/')

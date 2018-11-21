@@ -11,6 +11,7 @@ const showModel = new Schema({
     address: { type: String },
     videoPreview: { type: String },
     videoDescription: { type: String },
-    reasonRecommend: { type: String }
+    reasonRecommend: { type: String },
+    eventURL: { type: String }
 })
 export default mongoose.model('shows', showModel)

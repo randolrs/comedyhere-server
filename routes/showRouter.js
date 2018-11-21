@@ -51,12 +51,12 @@ showRouter.route('/:showId')
         res.json(req.show)
     })
     .patch((req,res)=>{
-        if(req.body._id){
-            delete req.body._id;
-        }
-        for( let p in req.body ){
-            req.show[p] = req.body[p]
-        }
+        // if(req.body._id){
+        //     delete req.body._id;
+        // }
+        // for( let p in req.body ){
+        //     req.show[p] = req.body[p]
+        // }
         req.show.save()
         res.json(req.show)
     })//patch

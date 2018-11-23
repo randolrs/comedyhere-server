@@ -64,27 +64,19 @@ showRouter.route('/')
         let show = new Show(req.body);
 
     	singleUpload(req, res, function(err, some) {
-    		// res.status(201).send('imge')
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
 		    show['image'] = '';
+		    res.status(201).send(req)
 		    if(req.file && req.file.location) {
-		    	// imege;
-		    	// res.status(201).send('imge')
+		    	// has image
 		    	show['image'] = req.file.location;
-		    } else {
-		    	// res.status(201).send('NOimge')
-		    	// noimg;
 		    }
 		    
 		    show.save();
 		    res.status(201).send(show) 
-		    // return res.json({'imgPrimary': req.file.location});
-		});
-        
-        // show.save();
-        // res.status(201).send(show) 
+		}); 
     })
 
 showRouter.route('/:showId')

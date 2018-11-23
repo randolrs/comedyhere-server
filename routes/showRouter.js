@@ -1,5 +1,7 @@
 import express from 'express';
 import Show from '../models/showModel';
+const upload = require('../services/file-upload.js');
+const singleUpload = upload.single('image')
 const showRouter = express.Router();
 
 showRouter.use('/:showId', (req, res, next)=>{
@@ -28,6 +30,15 @@ showRouter.use('/:showId', (req, res, next)=>{
     })
 })
 
+function uploadImg() {
+	singleUpload(req, res, function(err, some) {
+	    if (err) {
+	      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+	    }
+
+	    return res.json({'imageUrl': req.file.location});
+	 });
+}
 showRouter.route('/')
     .get((req, res) => {
         Show.find({}, (err, shows) => {
@@ -35,9 +46,29 @@ showRouter.route('/')
         })  
     })
     .post((req, res) => {
+    	// res.status(201).json(req.body) 
         let show = new Show(req.body);
-        show.save();
-        res.status(201).send(show) 
+
+        if(req.body['imgPrimary']) {
+        	// sdd;
+        	singleUpload(req, res, function(err, some) {
+			    if (err) {
+			      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+			    }
+			    show['imgPrimary'] = req.file.location;
+			    show.save();
+			    res.status(201).send(show) 
+			    // return res.json({'imgPrimary': req.file.location});
+			});
+        } else {
+        	// pppee;
+        	show.save();
+        	res.status(201).send(show) 
+        }
+        
+
+        // show.save();
+        // res.status(201).send(show) 
     })
 
 showRouter.route('/:showId')

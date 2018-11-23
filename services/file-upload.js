@@ -7,7 +7,10 @@ aws.config.update({
     // Never share it!
     // Setup Env Variable, e.g: process.env.SECRET_ACCESS_KEY
     secretAccessKey: process.env.AWS_KEY_SECRET, 
-    // secretAccessKey: process.env.AWS_KEY_SECRET,
+// <<<<<<< HEAD
+//     // secretAccessKey: process.env.AWS_KEY_SECRET,
+// =======
+// >>>>>>> parent of ffb076f... img handler update
     // Not working key, Your ACCESS KEY ID from AWS should go here,
     // Never share it!
     // Setup Env Variable, e.g: process.env.ACCESS_KEY_ID
@@ -17,6 +20,7 @@ aws.config.update({
 });
 
 const s3 = new aws.S3();
+
 
 const upload = multer({
   storage: multerS3({

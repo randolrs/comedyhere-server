@@ -68,7 +68,7 @@ showRouter.route('/')
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
 		    show['image'] = '';
-		    res.status(201).send(req)
+		    // res.status(201).send(req)
 		    if(req.file && req.file.location) {
 		    	// has image
 		    	show['image'] = req.file.location;

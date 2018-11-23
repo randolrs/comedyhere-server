@@ -1,9 +1,12 @@
 import express from 'express';
-import formData from 'express-form-data'
 import Show from '../models/showModel';
+import formData from 'express-form-data'
+
 const upload = require('../services/file-upload.js');
 const singleUpload = upload.single('image')
 const showRouter = express.Router();
+
+showRouter.use(formData.parse())
 
 showRouter.use('/:showId', (req, res, next)=>{
 
@@ -59,12 +62,19 @@ showRouter.route('/')
     })
     .post((req, res) => {
         let show = new Show(req.body);
+        
     	singleUpload(req, res, function(err, some) {
+    		// res.status(201).send('imge')
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
 		    if(req.file && req.file.location) {
+		    	// imege;
+		    	// res.status(201).send('imge')
 		    	show['image'] = req.file.location;
+		    } else {
+		    	// res.status(201).send('NOimge')
+		    	// noimg;
 		    }
 		    
 		    show.save();

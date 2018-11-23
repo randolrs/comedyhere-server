@@ -11,13 +11,9 @@ const db = mongoose.connect('mongodb://shane:Secure10ml@ds125618.mlab.com:25618/
 const app = express();
 const port = process.env.PORT || 5656;
 
-<<<<<<< HEAD
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-=======
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
->>>>>>> parent of ffb076f... img handler update
+
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

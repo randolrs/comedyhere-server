@@ -62,12 +62,13 @@ showRouter.route('/')
     })
     .post((req, res) => {
         let show = new Show(req.body);
-        
+
     	singleUpload(req, res, function(err, some) {
     		// res.status(201).send('imge')
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
+		    show['image'] = '';
 		    if(req.file && req.file.location) {
 		    	// imege;
 		    	// res.status(201).send('imge')

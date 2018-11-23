@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import showRouter from './routes/showRouter';
-
+import formData from 'express-form-data'
 import slug from 'mongoose-slug-generator';
 
 mongoose.plugin(slug);
@@ -30,5 +30,7 @@ app.use(function(req, res, next) {
 app.listen(port, () => {
     console.log(`http://localhost:${port}`)
 })
+
+app.use(formData.parse())
 
 app.use('/api/Shows', showRouter);

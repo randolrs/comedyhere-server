@@ -1,4 +1,5 @@
 import express from 'express';
+import formData from 'express-form-data'
 import Show from '../models/showModel';
 const upload = require('../services/file-upload.js');
 const singleUpload = upload.single('image')

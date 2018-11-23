@@ -25,20 +25,10 @@ showRouter.use('/:showId', (req, res, next)=>{
 			        }
 			    })
         	}
-            
         }
     })
 })
 
-// function uploadImg() {
-// 	singleUpload(req, res, function(err, some) {
-// 	    if (err) {
-// 	      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-// 	    }
-
-// 	    return res.json({'imageUrl': req.file.location});
-// 	 });
-// }
 showRouter.route('/')
     .get((req, res) => {
         Show.find({}, (err, shows) => {
@@ -46,44 +36,24 @@ showRouter.route('/')
         })  
     })
     .post((req, res) => {
-    	// res.status(201).json(req.body) 
         let show = new Show(req.body);
-// <<<<<<< HEAD
+        console.log('req.body: ', req.body);
     	singleUpload(req, res, function(err, some) {
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
-		    show['image'] = '';
+		    show['image'] = req.file;
+		    console.log('req.file: ', req.file)
 		    if(req.file && req.file.location) {
+		    	
 		    	show['image'] = req.file.location;
+		    } else {
+		    	console.log('no img')
 		    }
 		    
 		    show.save();
 		    res.status(201).send(show) 
 		});
-// =======
-
-//         if(req.body['imgPrimary']) {
-//         	// sdd;
-//         	singleUpload(req, res, function(err, some) {
-// 			    if (err) {
-// 			      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-// 			    }
-// 			    show['imgPrimary'] = req.file.location;
-// 			    show.save();
-// 			    res.status(201).send(show) 
-// 			    // return res.json({'imgPrimary': req.file.location});
-// 			});
-//         } else {
-//         	// pppee;
-//         	show.save();
-//         	res.status(201).send(show) 
-//         }
-        
-
-//         // show.save();
-//         // res.status(201).send(show) 
-// >>>>>>> parent of ffb076f... img handler update
     })
 
 showRouter.route('/:showId')

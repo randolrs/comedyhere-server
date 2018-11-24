@@ -40,7 +40,7 @@ showRouter.route('/')
         let show = new Show(req.body.data);
         console.log('show after initial assignmnet: ', show);
 
-    	singleUpload(req.body.data, res, function(err, some) {
+    	singleUpload(req, res, function(err, some) {
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }

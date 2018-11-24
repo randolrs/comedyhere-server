@@ -44,6 +44,8 @@ showRouter.route('/')
 		    if (err) {
 		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
 		    }
+		    console.log('inside singleUpload req: ', JSON.stringify(req))
+		    console.log('inside singleUpload req.body: ', JSON.stringify(req.body))
 		    show['image'] = req.file;
 		    console.log('req.file: ', req.file)
 		    if(req.file && req.file.location) {

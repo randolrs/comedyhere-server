@@ -11,6 +11,13 @@ const db = mongoose.connect('mongodb://shane:Secure10ml@ds125618.mlab.com:25618/
 const app = express();
 const port = process.env.PORT || 5656;
 
+const cors = require('cors')
+const { CLIENT_ORIGIN } = require('./config')
+
+app.use(cors({
+  origin: CLIENT_ORIGIN
+})) 
+
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 

@@ -33,34 +33,37 @@ showRouter.route('/')
     .get((req, res) => {
         Show.find({}, (err, shows) => {
             res.json(shows)
-        })  
+        })
     })
     .post((req, res) => {
     	console.log('req.body: ', req.body.data);
         let show = new Show(req.body.data);
         // console.log('req.body: ', req.body);
-    	singleUpload(req, res, function(err, some) {
-		    if (err) {
-		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-		    }
-		    show['image'] = req.file;
-		    console.log('req.file: ', req.file)
-		    if(req.file && req.file.location) {
-		    	
-		    	show['image'] = req.file.location;
-		    } else {
-		    	console.log('no img')
-		    }
-		    
-		    show.save();
-		    res.status(201).send(show) 
-		});
-    })
+				show.save();
+				res.status(201).send(show);
+    	// singleUpload(req, res, function(err, some) {
+		  //   if (err) {
+		  //     return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+		  //   }
+		  //   show['image'] = req.file;
+		  //   console.log('req.file: ', req.file)
+		  //   if(req.file && req.file.location) {
+			//
+		  //   	show['image'] = req.file.location;
+		  //   } else {
+		  //   	console.log('no img')
+		  //   }
+			//
+		  //   show.save();
+		  //   res.status(201).send(show)
+			// });
+    });
 
 showRouter.route('/:showId')
     .get((req, res) => {
-        res.json(req.show)
-    }) // end get Shows/:showId 
+        res.json(req.show);
+        console.log(req.show);
+    }) // end get Shows/:showId
     .put((req,res) => {
         // req.show.title = req.body.title;
         // req.show.author = req.body.description;

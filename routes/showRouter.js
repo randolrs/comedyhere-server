@@ -52,19 +52,19 @@ showRouter.route('/')
 				console.log('files[file][path]', files['file']['path']);
 
 				let imgPath = files['file']['path'];
-				s3Upload(imgPath).then((res) => {
-					let imgRoute = res;
-					showData['image'] = imgRoute;
-					let show = new Show(showData);
-					show.save();
-					res.status(201).send(show);
-				})
+				s3Upload(imgPath);
 
-			} else {
-				let show = new Show(showData);
-				res.status(201).send(show);
+				// s3Upload(imgPath).then((res) => {
+				// 	let imgRoute = res;
+				// 	showData['image'] = imgRoute;
+				// 	let show = new Show(showData);
+				// 	show.save();
+				// 	res.status(201).send(show);
+				// })
 			}
 
+			let show = new Show(showData);
+			res.status(201).send(show);
 
         // console.log('req.body: ', req.body);
 

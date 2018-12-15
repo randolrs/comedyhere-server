@@ -14,7 +14,7 @@ var s3 = new AWS.S3();
 
 //configuring parameters
 
-const s3Upload = (filepath) => {
+const s3Upload = (filePath) => {
   var params = {
     Bucket: 'us-west-2',
     Body : fs.createReadStream(filePath),

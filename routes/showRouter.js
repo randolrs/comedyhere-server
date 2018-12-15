@@ -3,7 +3,8 @@ import Show from '../models/showModel';
 const upload = require('../services/file-upload.js');
 const singleUpload = upload.single('image')
 const showRouter = express.Router();
-const formData = require('express-form-data')
+const formData = require('express-form-data');
+import s3Upload from '../services/s3-upload'
 
 showRouter.use('/:showId', (req, res, next)=>{
 
@@ -43,16 +44,27 @@ showRouter.route('/')
 			let files = req.files;
 			console.log('req.files:', files);
 
-			let file = req.file;
-			console.log('req.file:', file);
-
 			// let parsedShowData = formData.parse(showData);
 			// console.log('parsedShowData:', parsedShowData);
+			if(files['file'] && files['file']['path']) {
+				let imgPath = files['file']['path'];
+				s3Upload(imgPath).then((res) => {
+					let imgRoute = res;
+					showData['image'] = imgRoute;
+					let show = new Show(showData);
+					show.save();
+					res.status(201).send(show);
+				})
 
-      let show = new Show(showData);
-        // console.log('req.body: ', req.body);
-				show.save();
+			} else {
+				let show = new Show(showData);
 				res.status(201).send(show);
+			}
+
+
+        // console.log('req.body: ', req.body);
+
+
     	// singleUpload(req, res, function(err, some) {
 		  //   if (err) {
 		  //     return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });

@@ -36,8 +36,9 @@ showRouter.route('/')
         })
     })
     .post((req, res) => {
-    	console.log('req.body: ', req.body.data);
+    	console.log('req.body.data: ', req.body.data);
         let show = new Show(req.body.data);
+<<<<<<< HEAD
         // console.log('req.body: ', req.body);
 				show.save();
 				res.status(201).send(show);
@@ -58,6 +59,29 @@ showRouter.route('/')
 		  //   res.status(201).send(show)
 			// });
     });
+=======
+        console.log('show after initial assignmnet: ', show);
+
+    	singleUpload(req, res, function(err, some) {
+		    if (err) {
+		      return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
+		    }
+		    console.log('inside singleUpload req: ', req)
+		    console.log('inside singleUpload req.body: ', req.body)
+		    show['image'] = req.file;
+		    console.log('req.file: ', req.file)
+		    if(req.file && req.file.location) {
+		    	
+		    	show['image'] = req.file.location;
+		    } else {
+		    	console.log('no img')
+		    }
+		    
+		    show.save();
+		    res.status(201).send(show) 
+		});
+    })
+>>>>>>> 496b5c52b36dcc5e022cdcffb80b30ed15d34add
 
 showRouter.route('/:showId')
     .get((req, res) => {

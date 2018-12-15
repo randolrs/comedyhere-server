@@ -47,6 +47,9 @@ showRouter.route('/')
 			// let parsedShowData = formData.parse(showData);
 			// console.log('parsedShowData:', parsedShowData);
 			if(files['file'] && files['file']['path']) {
+				console.log('files', files);
+				console.log('files[file]', files['file']);
+				console.log('files[file][path])', files['file']['path']));
 				let imgPath = files['file']['path'];
 				s3Upload(imgPath).then((res) => {
 					let imgRoute = res;

@@ -10,7 +10,7 @@ AWS.config.update({
 });
 
 var s3 = new AWS.S3();
-var filePath = "./data/file.txt";
+// var filePath = "./data/file.txt";
 
 //configuring parameters
 

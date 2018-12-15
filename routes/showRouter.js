@@ -40,6 +40,12 @@ showRouter.route('/')
 			let showData = req.body;
 			console.log('showData:', showData);
 
+			let files = req.files;
+			console.log('req.files:', files);
+
+			let file = req.file;
+			console.log('req.file:', file);
+
 			// let parsedShowData = formData.parse(showData);
 			// console.log('parsedShowData:', parsedShowData);
 

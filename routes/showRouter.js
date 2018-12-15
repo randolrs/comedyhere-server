@@ -3,6 +3,7 @@ import Show from '../models/showModel';
 const upload = require('../services/file-upload.js');
 const singleUpload = upload.single('image')
 const showRouter = express.Router();
+const formData = require('express-form-data')
 
 showRouter.use('/:showId', (req, res, next)=>{
 
@@ -36,9 +37,13 @@ showRouter.route('/')
         })
     })
     .post((req, res) => {
-			console.log('req.body: ', req.body);
-    	console.log('req.body.data: ', req.body.data);
-        let show = new Show(req.body);
+			let showData = req.body;
+			console.log('showData:', showData);
+
+			let parsedShowData = formData.parse(showData);
+			console.log('parsedShowData:', parsedShowData);
+
+      let show = new Show(parsedShowData);
         // console.log('req.body: ', req.body);
 				show.save();
 				res.status(201).send(show);

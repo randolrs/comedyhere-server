@@ -38,7 +38,7 @@ showRouter.route('/')
     .post((req, res) => {
 			console.log('req.body: ', req.body);
     	console.log('req.body.data: ', req.body.data);
-        let show = new Show(req.body.data);
+        let show = new Show(req.body);
         // console.log('req.body: ', req.body);
 				show.save();
 				res.status(201).send(show);

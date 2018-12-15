@@ -16,7 +16,7 @@ const { CLIENT_ORIGIN } = require('./config')
 
 app.use(cors({
   origin: CLIENT_ORIGIN
-})) 
+}))
 
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

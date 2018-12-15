@@ -40,10 +40,10 @@ showRouter.route('/')
 			let showData = req.body;
 			console.log('showData:', showData);
 
-			let parsedShowData = formData.parse(showData);
-			console.log('parsedShowData:', parsedShowData);
+			// let parsedShowData = formData.parse(showData);
+			// console.log('parsedShowData:', parsedShowData);
 
-      let show = new Show(parsedShowData);
+      let show = new Show(showData);
         // console.log('req.body: ', req.body);
 				show.save();
 				res.status(201).send(show);

@@ -10,11 +10,10 @@ AWS.config.update({
 });
 
 var s3 = new AWS.S3();
-// var filePath = "./data/file.txt";
 
 //configuring parameters
 
-const s3Upload = (filePath) => {
+const s3Upload = new Promise((filePath) => {
   var params = {
     Bucket: 'comedyhere',
     Body : fs.createReadStream(filePath),
@@ -33,6 +32,6 @@ const s3Upload = (filePath) => {
       return data;
     }
   });
-}
+});
 
 export default s3Upload;

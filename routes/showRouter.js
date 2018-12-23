@@ -52,7 +52,9 @@ showRouter.route('/')
 				// console.log('files[file][path]', files['file']['path']);
 
 				let imgPath = files['file']['path'];
-				s3Upload(imgPath);
+				s3Upload(imgPath).then(res => {
+					console.log('s3 upload response:', res);
+				});
 
 				//*****Currently responds with 'Access Denied' response*****
 
@@ -63,6 +65,8 @@ showRouter.route('/')
 				// 	show.save();
 				// 	res.status(201).send(show);
 				// })
+			} else {
+
 			}
 
 			let show = new Show(showData);

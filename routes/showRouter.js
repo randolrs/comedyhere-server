@@ -52,9 +52,9 @@ showRouter.route('/')
 				// console.log('files[file][path]', files['file']['path']);
 
 				let imgPath = files['file']['path'];
-				s3Upload(imgPath).then(res => {
-					console.log('s3 upload response:', res);
-				});
+				let s3Img = s3Upload(imgPath);
+
+				console.log('s3Img', s3Img);
 
 				//*****Currently responds with 'Access Denied' response*****
 

@@ -16,7 +16,7 @@ var s3 = new AWS.S3();
 
 const s3Upload = (filePath) => {
   var params = {
-    Bucket: 'us-west-2',
+    Bucket: 'comedyhere',
     Body : fs.createReadStream(filePath),
     Key : "folder/"+Date.now()+"_"+path.basename(filePath)
   };

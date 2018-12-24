@@ -1,6 +1,5 @@
 import express from 'express';
 import Show from '../models/showModel';
-const singleUpload = upload.single('image')
 const showRouter = express.Router();
 const formData = require('express-form-data');
 import s3Upload from '../services/s3-upload'

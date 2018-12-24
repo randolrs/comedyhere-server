@@ -13,7 +13,7 @@ var s3 = new AWS.S3();
 
 //configuring parameters
 
-const s3Upload = new Promise((filePath) => {
+const s3Upload = (filePath, modelObj, modelKey) => {
   var params = {
     Bucket: 'comedyhere',
     Body : fs.createReadStream(filePath),
@@ -29,9 +29,11 @@ const s3Upload = new Promise((filePath) => {
     //success
     if (data) {
       console.log("Uploaded in:", data.Location);
+      modelObj[modelKey] = data.Location;
+      modelObj.save();
       return data;
     }
   });
-});
+}
 
 export default s3Upload;

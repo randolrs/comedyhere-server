@@ -38,59 +38,18 @@ showRouter.route('/')
         })
     })
     .post((req, res) => {
-			let showData = req.body;
-			console.log('showData:', showData);
+			const showData = req.body;
+			let show = new Show(showData);
+			show.save();
 
-			let files = req.files;
-			console.log('req.files:', files);
+			const files = req.files;
 
-			// let parsedShowData = formData.parse(showData);
-			// console.log('parsedShowData:', parsedShowData);
 			if(files['file'] && files['file']['path']) {
-				// console.log('files', files);
-				// console.log('files[file]', files['file']);
-				// console.log('files[file][path]', files['file']['path']);
-
-				let imgPath = files['file']['path'];
-				let s3Img = s3Upload(imgPath);
-
-				console.log('s3Img', s3Img);
-
-				//*****Currently responds with 'Access Denied' response*****
-
-				// s3Upload(imgPath).then((res) => {
-				// 	let imgRoute = res;
-				// 	showData['image'] = imgRoute;
-				// 	let show = new Show(showData);
-				// 	show.save();
-				// 	res.status(201).send(show);
-				// })
-			} else {
-
+				const imgPath = files['file']['path'];
+				s3Upload(imgPath, show, 'image');
 			}
 
-			let show = new Show(showData);
 			res.status(201).send(show);
-
-        // console.log('req.body: ', req.body);
-
-
-    	// singleUpload(req, res, function(err, some) {
-		  //   if (err) {
-		  //     return res.status(422).send({errors: [{title: 'Image Upload Error', detail: err.message}] });
-		  //   }
-		  //   show['image'] = req.file;
-		  //   console.log('req.file: ', req.file)
-		  //   if(req.file && req.file.location) {
-			//
-		  //   	show['image'] = req.file.location;
-		  //   } else {
-		  //   	console.log('no img')
-		  //   }
-			//
-		  //   show.save();
-		  //   res.status(201).send(show)
-			// });
     });
 
 showRouter.route('/:showId')

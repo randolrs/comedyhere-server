@@ -13,7 +13,7 @@ var s3 = new AWS.S3();
 
 //configuring parameters
 
-const s3Upload = (filePath, modelObj, modelKey) => {
+const s3Upload = (filePath, modelObj = null, modelKey = null) => {
   var params = {
     Bucket: 'comedyhere',
     Body : fs.createReadStream(filePath),
@@ -29,8 +29,10 @@ const s3Upload = (filePath, modelObj, modelKey) => {
     //success
     if (data) {
       console.log("Uploaded in:", data.Location);
-      modelObj[modelKey] = data.Location;
-      modelObj.save();
+      if(modelObj && modelKey) {
+        modelObj[modelKey] = data.Location;
+        modelObj.save();
+      }
       return data;
     }
   });

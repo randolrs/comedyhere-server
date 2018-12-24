@@ -9,6 +9,8 @@ const showModel = new Schema({
     description: { type: String },
     venueName: { type: String },
     address: { type: String },
+    addressLat: { type: Number },
+    addressLng: { type: Number },
     videoPreview: { type: String },
     videoDescription: { type: String },
     reasonRecommend: { type: String },
